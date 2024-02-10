@@ -14,20 +14,19 @@ User research was conducted to understand the needs and challenges faced by stud
 
 ## Future Updates
 Planned updates include:
-- Enhanced AI-driven spam detection.
-- Real-time collaboration tools.
+- Implementation of wish-list including liked projects, courses, and profiles.
+- AI based doubt solving.
 - Integration with educational resources and APIs.
 - Mobile app enhancements for better user engagement.
 
 ## Different Pages
-- **Project Showcase:** Detailed view of projects with multimedia support.
+- **Project Showcase:** Detailed view of projects with comments and rating support.
 - **Profile Page:** Where students can showcase their skills and projects.
-- **Chatroom:** Chat with other studentts on collaborated projects.
+- **Chatroom:** Chat with other students on collaborated projects.
 - **Course Review Page:** For sharing and reading course reviews.
 - **Doubts Page:** A platform for asking for help and sharing knowledge.
 
 ## Features
-- Multimedia support for project showcasing.
 - Rating and feedback system for projects.
 - Ask-for-help functionality.
 - Course review system.
@@ -44,8 +43,8 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
 
 2. **Clone the Repository:**
    ```sh
-   git clone https://github.com/Nikhil-IITG/kritiDev.git
-   cd kritiDev
+   git clone https://github.com/Nikhil-IITG/KritiDevelopmentPS.git
+   cd KritiDevelopmentPS
    ```
 
 3. **Backend Setup:**
@@ -71,19 +70,13 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
      ```sh
      npm start
      ```
-   - The application should now be running on `https://kriti-dev-backend.vercel.app`.
 
 5. **Environment Variables:**
    Make a file named .env in the main folder, it's content should be:
    ```sh
     MONGO_URI = "Your MongoDB URI"
-    CALLBACK_URL = "https://kriti-dev-backend.vercel.app/auth/microsoft/redirect"
+    CALLBACK_URL = "Your Callback URL"
     CLIENT_ID = "Your Microsoft Client ID"
     CLIENT_SECRET = "Your Microsoft Client Secret"
     ```
 
-## Deployed Link
-[Campus Collaborate Live](#) - A placeholder link for the deployed application.
-
-## Video Demonstration
-A video walkthrough of the application showcasing its features, user interface, and how to use it effectively.
