@@ -2,7 +2,7 @@
 // import { Link, useParams } from 'react-router-dom';
 // import axios from 'axios';
 // import io from 'socket.io-client';
-// const socket = io.connect('https://kriti-dev-backend.vercel.app');
+// const socket = io.connect('http://localhost:5500');
 // const ChatRoom = () => {
 //   const userId = useParams().userID;
 //   const [selectedProject, setSelectedProject] = useState(null);
@@ -16,7 +16,7 @@
 //     const fetchCollabedProjects = async () => {
 //       try {
 //         console.log(userId);
-//         const response = await axios.get(`https://kriti-dev-backend.vercel.app/api/collab/collabs/${userId}`);
+//         const response = await axios.get(`http://localhost:5500/api/collab/collabs/${userId}`);
 //         setCollabedProjects(response.data);
 //       } catch (error) {
 //         console.error('Error fetching collabed projects:', error);
@@ -34,7 +34,7 @@
 //     socket.emit('join-room', {room : projectId});
 //     try {
 //       // Fetch chat messages for the selected project
-//       const response = await axios.get(`https://kriti-dev-backend.vercel.app/api/collab/chat/${projectId}`);
+//       const response = await axios.get(`http://localhost:5500/api/collab/chat/${projectId}`);
 //       setMessages(response.data);
 //     } catch (error) {
 //       console.error('Error fetching chat messages:', error);
@@ -51,7 +51,7 @@
 //     // Create a new message object
 //     const newMessage = { userID: userId, message: messageInput };
 //     // Make a POST request to store the message
-//     await axios.post(`https://kriti-dev-backend.vercel.app/api/collab/chat/${selectedProject}`,  newMessage );
+//     await axios.post(`http://localhost:5500/api/collab/chat/${selectedProject}`,  newMessage );
 //     socket.emit('send-message', {user : userId, message : newMessage, sendTo : selectedProject});
 //     }
 //     setMessages([...messages, { userID: userId, message: messageInput }]);
@@ -141,7 +141,7 @@ import ChatContent from '../Components/ChatContent';
 import ChatList from '../Components/ChatList';
 import'./CollabPage.css';
 
-const socket = io.connect('https://kriti-dev-backend.vercel.app');
+const socket = io.connect('http://localhost:5500');
 
 const CollabPage = () => {
   const navigate = useNavigate();
@@ -154,7 +154,7 @@ const CollabPage = () => {
   useEffect(() => {
     const fetchCollabedProjects = async () => {
       try {
-        const response = await axios.get(`https://kriti-dev-backend.vercel.app/api/collab/collabs/${userId}`);
+        const response = await axios.get(`http://localhost:5500/api/collab/collabs/${userId}`);
         setCollabedProjects(response.data);
       } catch (error) {
         console.error('Error fetching collabed projects:', error);
@@ -173,7 +173,7 @@ const CollabPage = () => {
     socket.emit('join-room', { room: projectId });
     try {
       // Fetch chat messages for the selected project
-      const response = await axios.get(`https://kriti-dev-backend.vercel.app/api/collab/chat/${projectId}`);
+      const response = await axios.get(`http://localhost:5500/api/collab/chat/${projectId}`);
       setMessages(response.data);
       console.log(response.data);
     } catch (error) {

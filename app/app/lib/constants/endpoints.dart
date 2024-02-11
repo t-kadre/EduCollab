@@ -11,7 +11,7 @@
 // }
 
 // const String baseurl = "http://10.0.2.2:5500";
-const String baseurl = "https://kriti-dev-backend.vercel.app";
+const String baseurl = "http://localhost:5500";
 // const String baseurl = "http://localhost:5500";
 
 

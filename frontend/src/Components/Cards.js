@@ -15,7 +15,7 @@ function Card({ques,ans}){
     const handleVote = (index, type, answerID) => {
         const userid=JSON.parse(localStorage.getItem("userData"));
         
-        fetch(`https://kriti-dev-backend.vercel.app/api/doubts/votes/${answerID}`, {
+        fetch(`http://localhost:5500/api/doubts/votes/${answerID}`, {
         method: 'PUT',
         
         body: JSON.stringify({

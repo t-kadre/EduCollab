@@ -1,53 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import "./AddCourse.css";
+import "./updateprofile.css";
 
-const AddCourse = () => {
-  // const [userData, setUserData] = useState(() =>
-  //   JSON.parse(localStorage.getItem("userData") || "{}")
-  // );
+const UpdateProfile = () => {
+  const [userData, setUserData] = useState(() =>
+    JSON.parse(localStorage.getItem("userData") || "{}")
+  );
 
   // Initialize form values directly from userData state
-  // const initialValues = {
-  //   githubID: userData?.githubID || "",
-  //   designation: userData?.designation || "",
-  //   tags: [""], // Assuming tags always start empty or can be populated similarly if needed
-  // };
+  const initialValues = {
+    githubID: userData?.githubID || "",
+    designation: userData?.designation || "",
+    tags: [""], // Assuming tags always start empty or can be populated similarly if needed
+  };
 
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const user=JSON.parse(localStorage.getItem("userData"));
-  const userid=user._id;
-  const initialValues = {
-    courseName: "",
-    courseDesc: "",
-    linkToCourse: "",
-    tags: [""], // Initialize tags as an empty array
-  };
+
   const handleSubmit = async (values) => {
-     // Exit if no userData is found
-     
+    if (!userData) return; // Exit if no userData is found
+    const userID = userData._id;
 
     try {
-      console.log("new course: ", values);
+      console.log("In update profile: ", userData);
       const response = await fetch(
-        `https://kriti-dev-backend.vercel.app/courses/add/${userid}/addCourse`,
+        `http://localhost:5500/users/update/${userID}`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({tag: values.tags, courseName: values.courseName, courseDesc: values.courseDesc, linkToCourse: values.linkToCourse}),
+          body: JSON.stringify(values),
         }
       );
 
       if (!response.ok) {
         throw new Error("Failed to update profile");
       }
-      alert("Course Added Successfully!");
+
+      alert("User profile updated successfully");
       setUpdateSuccess(true); // Set flag to true on successful update
     } catch (error) {
-      console.error("Error adding course:", error);
-      alert(`Error adding course: ${error.message}`); // Show error alert
+      console.error("Error updating profile:", error);
+      alert(`Error updating profile: ${error.message}`); // Show error alert
     }
   };
 
@@ -60,48 +54,57 @@ const AddCourse = () => {
 
   return (
     <div className="update-profile-container">
-      <h2 className="update_profile_heading">Add Course</h2>
+      <h2 className="update_profile_heading">Update Profile</h2>
       <Formik
-      initialValues={initialValues}
-        
+        initialValues={initialValues}
         onSubmit={handleSubmit}
         enableReinitialize
       >
         {({ values }) => (
           <Form className="update-profile-form">
             <div className="form-group">
-              <label className="form-label">Course Name:</label>
-              <Field
+              <label className="form-label">Name:</label>
+              <input
                 type="text"
                 className="form-control"
-                name="courseName"
-                
+                value={userData.username || ""}
+                disabled
               />
             </div>
 
             <div className="form-group">
-              <label className="form-label">Course Description:</label>
-              <Field
-                type="text"
+              <label className="form-label">Email:</label>
+              <input
+                type="email"
                 className="form-control"
-                name="courseDesc"
-                
+                value={userData.email || ""}
+                disabled
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="courseLink" className="form-label">
-                Course Link:
+              <label htmlFor="githubLink" className="form-label">
+                GitHub Link:
               </label>
               <Field
                 type="text"
                 id="githubLink"
-                name="linkToCourse"
+                name="githubID"
                 className="form-control"
               />
             </div>
 
-        
+            <div className="form-group">
+              <label htmlFor="designation" className="form-label">
+                Designation:
+              </label>
+              <Field
+                type="text"
+                id="designation"
+                name="designation"
+                className="form-control"
+              />
+            </div>
 
             <div className="form-group">
               <label className="form-label">Tags:</label>
@@ -154,4 +157,4 @@ const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default UpdateProfile;

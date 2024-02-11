@@ -124,6 +124,8 @@ const ProjectPopOut = ({ projectData }) => {
   const [rating, setRating] = useState(0);
   const [projectComments, setProjectComments] = useState([]);
   const [tags, setTags] = useState([]); 
+  const [isUserJoined, setIsUserJoined] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const ensureFullURL = (link) => {
     if (!link.startsWith('http://') && !link.startsWith('https://')) {
       return `https://${link}`;
@@ -136,11 +138,30 @@ const ProjectPopOut = ({ projectData }) => {
     console.log('course Adder:', projectowner);
   const user = JSON.parse(localStorage.getItem("userData"));
 
-  useEffect(() => {
-    // Fetch all comments for the project
+  const handleJoinEvent = () => {
+
+    fetch(`http://localhost:5500/projects/addContributor/${projectData._id}/${user._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userID: user._id,
+        status: 'pending',
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert('You have successfully joined the project');
+      console.log('Success:', data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })};
     const fetchComments = async () => {
       try {
-        const response = await fetch(`https://kriti-dev-backend.vercel.app/projects/getComment/${projectData._id}`);
+        const response = await fetch(`http://localhost:5500/projects/getComment/${projectData._id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch project comments');
         }
@@ -148,40 +169,75 @@ const ProjectPopOut = ({ projectData }) => {
         const data = await response.json();
         setProjectComments(data.data); // Adjust according to your actual response structure
         setTags(projectData.tags)
+        const isUserJoinedPending = projectData.contributors.some(contributor => contributor.userID === user._id && contributor.status === 'pending');
+        setIsUserJoined(isUserJoinedPending);
+        setIsCompleted(projectData.status === 'completed');
       } catch (error) {
         console.error('Error:', error);
-      }
+      }    
     };
-
+    const submitReview = () => {
+      for (let i = 0; i < projectComments.length; i++) {
+        if (projectComments[i].userID === user._id) {
+            // User ID is present in feedbackData[i].userID
+            // Add your logic here
+            alert("You have already submitted your comment on this Project.");
+            return;
+        }
+    }
+      console.log(reviewText, rating);
+  
+      fetch(`http://localhost:5500/projects/addComment/${projectData._id}/${user._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user._id, // Corrected to use 'user' from state
+          review: reviewText,
+          rating: rating,
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        setProjectComments([...projectComments, { review: reviewText, rating: rating, user: user._id }]);
+        setReviewText("");
+        setRating(0);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })};
+      const handleCompleteClick = () => {
+        fetch(`http://localhost:5500/projects/complete/${projectData._id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: 'completed',
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          setIsCompleted(true);
+          alert(`Project is completed. All contributors have recieved ${projectData.perHeadCredits} credits.`);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })}
+      
+  useEffect(() => {
+    // Fetch all comments for the project
+    
     fetchComments();
-  }, [projectData.comments]); // Dependency array ensures this runs when projectData._id changes
-
-  const submitReview = () => {
-    console.log(reviewText, rating);
-
-    fetch(`https://kriti-dev-backend.vercel.app/projects/addComment/${projectData._id}/${user._id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: user._id, // Corrected to use 'user' from state
-        review: reviewText,
-        rating: rating,
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      setProjectComments([...projectComments, { review: reviewText, rating: rating, user: user._id }]);
-      setReviewText("");
-      setRating(0);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
+    
     });
-  };
-
+  
+  
+  
   return (
     <>
     {projectData && 
@@ -202,8 +258,22 @@ const ProjectPopOut = ({ projectData }) => {
               <div key={index} className="project_pop_individualTags">{tag}</div>
             ))}
           </div>
-          <button className="project_pop_joinBtn">Join</button>
-        </div>
+          
+
+          <button className="project_pop_joinBtn" onClick={handleJoinEvent} disabled={projectData.status === 'completed' || isUserJoined} style={{ backgroundColor: projectData.status === 'completed' || isUserJoined ? 'green' : 'blue' }}>
+            {projectData.status === 'completed' ? 'Completed' : isUserJoined ? 'Joined' : 'Join'}
+          </button>
+
+      {user._id === projectowner._id && !isCompleted && (
+        <button className="project_pop_joinBtn" onClick={handleCompleteClick} disabled={isCompleted} style={{backgroundColor: isCompleted?'green':'blue'}}>
+          {isCompleted ? 'Project is Completed' : 'Click here to Complete this Project'}
+        </button>
+      )}
+    </div>
+  
+
+          
+        
 
         {/* Reviews Section */}
         <div className="project_pop_right">
@@ -255,7 +325,7 @@ const ProjectPopOut = ({ projectData }) => {
       </div>
     }
     </>
-  );
-};
+  )};
+
 
 export default ProjectPopOut;

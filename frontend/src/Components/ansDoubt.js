@@ -16,7 +16,7 @@ function AnsDoubt({quesid}) {
             return;
         }
         setSubmitClicked(true);
-        fetch(`https://kriti-dev-backend.vercel.app/api/doubts/postans/${userid}`, {
+        fetch(`http://localhost:5500/api/doubts/postans/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

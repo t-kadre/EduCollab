@@ -86,7 +86,7 @@
 
 
 import React from "react";
-import "./CourseCard.css";
+import "./courseCard.css";
 import Popup from 'reactjs-popup';
 import mySVGURL from '../Assets/userDummy.svg';
 import Popoutcourse from './popoutcourse';

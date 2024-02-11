@@ -14,7 +14,7 @@
 // //     const status = statusElement ? statusElement.textContent : undefined;
 // //     const tags = Array.from(document.querySelectorAll('.tagsinput .tags-selected')).map(tag => tag.textContent);
 // //     try {
-// //       const response = await axios.post(`https://kriti-dev-backend.vercel.app/projects/add`, {
+// //       const response = await axios.post(`http://localhost:5500/projects/add`, {
 // //         title,
 // //         description,
 // //         githubLink,
@@ -130,7 +130,7 @@
 // //     try {
 // //       console.log("In update profile: ", userData);
 // //       const response = await fetch(
-// //         `https://kriti-dev-backend.vercel.app/users/update/${userID}`,
+// //         `http://localhost:5500/users/update/${userID}`,
 // //         {
 // //           method: "PATCH",
 // //           headers: {
@@ -283,7 +283,7 @@
 
 //   const handleSubmit = async (values) => {
 //     try {
-//       const response = await fetch('https://kriti-dev-backend.vercel.app/projects/add', {
+//       const response = await fetch('http://localhost:5500/projects/add', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -389,7 +389,11 @@ const AddProject = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch(`https://kriti-dev-backend.vercel.app/projects/add/${user._id}`, {
+      if(values.credits>(user.creditScore)/10){
+        alert('Per head credits CANNOT be more than 10% of your credit score');
+        return;
+      }
+      const response = await fetch(`http://localhost:5500/projects/add/${user._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -445,10 +449,17 @@ const AddProject = () => {
                 <option value="completed">Completed</option>
               </Field>
             </div>
-
             <div className="form-group">
-              <label htmlFor="credits" className="form-label">Credits:</label>
-              <Field id="credits" name="credits" type="text" className="form-control" />
+              <label htmlFor="title" className="form-label">Github Link:</label>
+              <Field id="gitlink" name="githubLink" type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="title" className="form-label">Deployed Link:</label>
+              <Field id="deplink" name="deployedLink" type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="credits" className="form-label">Per Head Credits:</label>
+              <Field id="credits" name="credits" type="number" className="form-control" />
             </div>
 
             <div className="form-group">

@@ -14,7 +14,7 @@ const ProfileCard = () => {
 
   const handleEditProfileClick = () => {
     const link = document.createElement('a');
-    link.href = 'https://kriti-dev-frontend.vercel.app/updateProfile';
+    link.href = 'http://localhost:3000updateProfile';
     link.style.display = 'none'; // Hide the link
     document.body.appendChild(link);
     link.click();

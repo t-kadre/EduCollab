@@ -71,13 +71,13 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
      ```sh
      npm start
      ```
-   - The application should now be running on `https://kriti-dev-backend.vercel.app`.
+   - The application should now be running on `http://localhost:5500`.
 
 5. **Environment Variables:**
    Make a file named .env in the main folder, it's content should be:
    ```sh
     MONGO_URI = "Your MongoDB URI"
-    CALLBACK_URL = "https://kriti-dev-backend.vercel.app/auth/microsoft/redirect"
+    CALLBACK_URL = "http://localhost:5500/auth/microsoft/redirect"
     CLIENT_ID = "Your Microsoft Client ID"
     CLIENT_SECRET = "Your Microsoft Client Secret"
     ```

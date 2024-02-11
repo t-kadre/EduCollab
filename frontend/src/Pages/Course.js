@@ -1,6 +1,6 @@
 // CoursePage.js
 import React, { useEffect, useState } from "react";
-import CourseCard from "../Components/CourseCard";
+import CourseCard from "../Components/courseCard";
 import Navbar from "../Components/Navbar";
 import "./Course.css";
 import Popup from 'reactjs-popup';

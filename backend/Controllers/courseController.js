@@ -31,20 +31,19 @@ const getCourseById = async (req, res) => {
 const postCourse = async (req, res, next) => {
   try {
     const { tag, courseName, courseDesc, linkToCourse } = req.body;
-
+    const userID = req.params.userID;
     const newCourse = new Course({
       tag: tag,
       courseName: courseName,
       courseDesc: courseDesc,
       rating: 0,
       feedback: [],
-      addedBy: req.params.userID,
+      addedBy: userID,
       linkToCourse: linkToCourse,
     });
 
     await newCourse.save();
-    const userid=req.params.userID;
-    const user=await User.findById(userid);
+    const user=await User.findById(userID);
     user.myCourses.push(newCourse._id);
     await user.save();
     res

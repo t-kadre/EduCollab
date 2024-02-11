@@ -12,7 +12,7 @@ function AskDoubt() {
     const userid=user._id;  
     const handleSubmit = async () => {
         setSubmitClicked(true);
-        await fetch(`https://kriti-dev-backend.vercel.app/api/doubts/postdoubt/${userid}`, {
+        await fetch(`http://localhost:5500/api/doubts/postdoubt/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

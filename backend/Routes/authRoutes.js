@@ -91,7 +91,7 @@ router.get('/microsoft/redirect/success', logUserDetails, async (req, res) => {
         }
 
         // Redirect the user to the dashboard
-        res.redirect('https://kriti-dev-frontend.vercel.app/dashboard');
+        res.redirect('http://localhost:3000/dashboard');
     } catch (error) {
         console.error('Error while processing user data:', error);
         res.redirect('/auth/microsoft/redirect/failure');

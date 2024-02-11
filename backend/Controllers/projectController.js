@@ -182,7 +182,7 @@ const Comment = require("../Models/commentModel.js");
 const User = require("../Models/userModel");
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
-
+const Chat = require("../Models/chatModel");
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
@@ -191,49 +191,42 @@ cloudinary.config({
 
 const postProject = async (req, res) => {
   const projectData = req.body;
-  const file = req.file;
+  console.log("Project Data:",projectData);
   const userID = req.params.userID; // Make sure this param name matches the one in your route
 
   try {
     // Create the new project without saving it just yet
     const newProject = new Project({
-      ...projectData,
-      owner: userID // Ensure 'owner' is the correct field name in your schema
+      title: projectData.title,
+      description: projectData.description,
+      tags: projectData.tags,
+      githubLink: projectData.githubLink,
+      deployedLink: projectData.deployedLink,
+      owner: userID, // Ensure 'owner' is the correct field name in your schema
+      perHeadCredits: projectData.credits,
+      contributors: [], // Add the owner as an approved contributor
+      comments: [],
+      rating: 0,
+      status: projectData.status
     });
+    newProject.contributors.push({ userID: userID, status: 'pending' });
+    await newProject.save();
 
-    // Function to handle adding the project ID to user's lists
-    const updateUserProjects = async (projectId) => {
-      // Assuming you have a UserModel that corresponds to your users
-      await User.findByIdAndUpdate(userID, {
-        $addToSet: { // Use $addToSet to avoid duplicates
-          myProjects: projectId,
-          myCollaboratedProjects: projectId
-        }
-      });
-    };
+    const user= await User.findById(userID);
+    user.myProjects.push(newProject._id);
+    user.myCollabedProjects.push(newProject._id);
+    await user.save();
 
-    if (file) {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: "your_folder_name" },
-        async (error, result) => {
-          if (error) {
-            console.error(error);
-            return res.status(500).json({ message: "Error uploading file" });
-          }
-          newProject.icon = result.secure_url;
-          // Save the project and update user model
-          const savedProject = await newProject.save();
-          await updateUserProjects(savedProject._id);
-          res.status(201).json(savedProject);
-        }
-      );
-      streamifier.createReadStream(file.buffer).pipe(uploadStream);
-    } else {
-      // If there is no file, save the project and update user model
-      const savedProject = await newProject.save();
-      await updateUserProjects(savedProject._id);
-      res.status(201).json(savedProject);
-    }
+    const chat= new Chat({
+      projectID:newProject._id,
+      projectName:newProject.title,
+      members:[userID],
+      messages:[]
+    });
+    await chat.save();
+    
+      res.status(201).json(newProject);
+    // }
   } catch (error) {
     console.error(error);
     res.status(409).json({ message: error.message });
@@ -336,29 +329,34 @@ const getProjectComment = async (req, res) => {
 };
 
 const addCollaborators = async (req, res) => {
-  const { projectId } = req.params;
-  const { userId } = req.body;
+  const projectID  = req.params.projectID;
+  const userID  = req.params.userID;
 
   try {
-    const project = await Project.findById(projectId);
+    const project = await Project.findById(projectID);
 
     if (!project) {
       return res.status(404).json({ message: "Project not found" });
     }
 
     // Check if user is already a contributor
-    const existingContributor = project.contributors.find(
-      (contributor) => contributor.userId === userId
-    );
+    // const existingContributor = project.contributors.find(
+    //   (contributor) => contributor.userId === userId
+    // );
 
-    if (existingContributor) {
-      return res.status(400).json({ message: "User already a contributor" });
-    }
+    // if (existingContributor) {
+    //   return res.status(400).json({ message: "User already a contributor" });
+    // }
 
     // Add user to project contributors with status pending
-    project.contributors.push({ userId, status: "pending" });
+    project.contributors.push({ userID: userID, status: 'pending' });
     await project.save();
-
+    const user = await User.findById(userID);
+    user.myCollabedProjects.push(projectID);
+    await user.save();
+    const chat= new Chat.findOne({projectID:projectID});
+    chat.members.push(userID);
+    await chat.save();
     res.status(200).json({ message: "User joined project successfully" });
   } catch (error) {
     console.error("Error joining project:", error);
@@ -390,7 +388,26 @@ const acceptCollaborator = async (req, res) => {
       .json({ message: "Error approving contributor", error: error.message });
   }
 };
-
+const completeProject = async (req, res) => {
+  const projectID = req.params.projectID;
+  try {
+    const project = await Project.findById(projectID);
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+    project.status = "completed";
+    await project.save();
+    const users = await User.find({ myCollabedProjects: projectID });
+    users.forEach(async (user) => {
+      user.creditScore += project.perHeadCredits;
+      await user.save();
+    });
+    res.status(200).json({ message: "Project completed successfully" });
+    
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 const rejectCollaborator = async (req, res) => {
   const { projectId, userId } = req.params;
 
@@ -424,5 +441,6 @@ module.exports = {
   acceptCollaborator,
   rejectCollaborator,
   postProjectComment,
-  getProjectComment
+  getProjectComment,
+  completeProject
 };

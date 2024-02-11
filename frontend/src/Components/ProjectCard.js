@@ -67,11 +67,11 @@ const ProjectCard = ({ projectData }) => {
         <>
           <div className="ProjectCardBoxUpper">
             <div className="ProjectCardBoxUpperLeft">
-              <div className="ProjectCardBoxUpperLeftName">Jv</div>
+              <div className="ProjectCardBoxUpperLeftName">{projectData.title.substring(0, 2)}</div>
             </div>
             <div className="ProjectCardBoxUpperRight">
               <div className="ProjectCardBoxUpperRightCW">
-                <div className="ProjectCardBoxUpperRightCWLikes">1.7k</div>
+                <div className="ProjectCardBoxUpperRightCWLikes">{projectData.rating}</div>
                 <div className="ProjectCardBoxUpperRightCWCircle">
                   <img
                     src={likeSVG}

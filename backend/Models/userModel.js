@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, default: '' }, 
   email: { type: String, unique: true, default: '' }, 
-  creditScore: { type: Number, default: 0 },
+  creditScore: { type: Number, default: 30 },
   tags: [{ type: String, default: [] }], 
   profilePic: { type: String, default: '' },
   githubID: { type: String, default: '' },

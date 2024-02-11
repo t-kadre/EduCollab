@@ -27,7 +27,7 @@ const Doubts = () => {
     useEffect(() => {
         async function fetchDoubts() {
             try {
-                const response = await fetch('https://kriti-dev-backend.vercel.app/api/doubts');
+                const response = await fetch('http://localhost:5500/api/doubts');
                 if (!response.ok) {
                     throw new Error('Failed to fetch doubts');
                 }

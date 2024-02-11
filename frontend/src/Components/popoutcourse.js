@@ -22,7 +22,7 @@
 //     useEffect(() => {
 //     const fetchFeedback = async () => {
 //         try {
-//             const response = await fetch(`https://kriti-dev-backend.vercel.app/courses/getfeedback/${course._id}`);
+//             const response = await fetch(`http://localhost:5500/courses/getfeedback/${course._id}`);
 //             const feedback = await response.json();
 //             console.log('All feedback:', feedback.data);
 //             setFeedbackData(feedback.data);
@@ -156,7 +156,7 @@ const Popoutcourse = ({ course }) => {
     useEffect(() => {
     const fetchFeedback = async () => {
         try {
-            const response = await fetch(`https://kriti-dev-backend.vercel.app/courses/getfeedback/${course._id}`);
+            const response = await fetch(`http://localhost:5500/courses/getfeedback/${course._id}`);
             const feedback = await response.json();
             console.log('All feedback:', feedback.data);
             setFeedbackData(feedback.data);
@@ -170,8 +170,17 @@ const Popoutcourse = ({ course }) => {
     }, [course._id]);
   const submitReview = () => {
     // Handle the review submission logic here
+    for (let i = 0; i < feedbackData.length; i++) {
+        if (feedbackData[i].userID === user._id) {
+            // User ID is present in feedbackData[i].userID
+            // Add your logic here
+            alert("You have already submitted a review for this course");
+            return;
+        }
+    }
+    
     console.log(reviewText, rating);
-    fetch(`https://kriti-dev-backend.vercel.app/courses/addFeedback/${course._id}/${userid}/add`, {
+    fetch(`http://localhost:5500/courses/addFeedback/${course._id}/${userid}/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
