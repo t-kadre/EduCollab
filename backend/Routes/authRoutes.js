@@ -78,7 +78,7 @@ router.get('/microsoft/redirect/success', logUserDetails, async (req, res) => {
             const newUser = new User({
                 email: userEmail,
                 username: req.userData.displayName,
-                creditScore: 100,
+                creditScore: 30,
                 
             });
 

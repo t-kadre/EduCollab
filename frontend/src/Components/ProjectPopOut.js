@@ -4,7 +4,7 @@
 // import ProfileCard from './ProfileCard';
 // //import { FaHeart, FaUser, FaSearch } from "react-icons/fa";
 // // s
-// import wishlistSVGURL from '../Assets/heart.svg'
+// import FilledStarIcon from '../Assets/heart.svg'
 // import dollarSVG from '../Assets/dollar.svg'
 // const ProjectPopOut = () => {
 //   return (
@@ -35,7 +35,7 @@
 //                 </div>
 //               </div>
 //               <div className="job_no_of_likes">3.6k</div>
-//               <div className="navbar-right-circle"><img src={wishlistSVGURL} alt="My SVG" className="navbar-right-circle-img" /></div>
+//               <div className="navbar-right-circle"><img src={FilledStarIcon} alt="My SVG" className="navbar-right-circle-img" /></div>
 //             </div>
 //           </div>
 //           <div className="job_description_holder">
@@ -204,6 +204,8 @@ const ProjectPopOut = ({ projectData }) => {
         setProjectComments([...projectComments, { review: reviewText, rating: rating, user: user._id }]);
         setReviewText("");
         setRating(0);
+        alert("Review added");
+        window.location.href='/dashboard';
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -249,6 +251,17 @@ const ProjectPopOut = ({ projectData }) => {
               <div className="project_pop_name">{projectowner.username}</div>
               <img src={mySVGURL} alt="" className="project_pop_profileIcon" />
             </div>
+            <div className="project_pop_likes">
+              <span>{projectData.rating}</span>
+              <div className="project_pop_heartContainer">
+                <img
+                  src={FilledStarIcon}
+                  alt=""
+                  className="project_pop_heart"
+                />
+              </div>
+
+            </div>
           </div>
           <div className="project_pop_projectTitle">{projectData.title}</div>
           <div className="project_pop_describe">{projectData.description}</div>
@@ -259,16 +272,18 @@ const ProjectPopOut = ({ projectData }) => {
             ))}
           </div>
           
-
-          <button className="project_pop_joinBtn" onClick={handleJoinEvent} disabled={projectData.status === 'completed' || isUserJoined} style={{ backgroundColor: projectData.status === 'completed' || isUserJoined ? 'green' : 'blue' }}>
+          <div className = "project__pop__btns">
+          <button className="project_pop_joinBtn" onClick={handleJoinEvent} disabled={projectData.status === 'completed' || isUserJoined} 
+          style={{ backgroundColor: projectData.status === 'completed' || isUserJoined ? 'green' : 'blue', color: 'white', marginBottom: '1vw', padding: '0.4vw 1vw', fontSize: '1.5vw', borderRadius: '1vw', cursor: 'pointer' }}>
             {projectData.status === 'completed' ? 'Completed' : isUserJoined ? 'Joined' : 'Join'}
           </button>
 
       {user._id === projectowner._id && !isCompleted && (
-        <button className="project_pop_joinBtn" onClick={handleCompleteClick} disabled={isCompleted} style={{backgroundColor: isCompleted?'green':'blue'}}>
-          {isCompleted ? 'Project is Completed' : 'Click here to Complete this Project'}
+        <button className="project_pop_joinBtn" onClick={handleCompleteClick} disabled={isCompleted} style={{backgroundColor: isCompleted?'green':'blue', color: 'white', padding: '0.4vw 1vw', fontSize: '1.5vw', borderRadius: '1vw', cursor: 'pointer' }}>
+          {isCompleted ? 'Project is Completed' : 'Click here to mark this project as Completed'}
         </button>
       )}
+      </div>
     </div>
   
 
@@ -293,6 +308,7 @@ const ProjectPopOut = ({ projectData }) => {
               </div>
             ))}
 
+          </div>
             {/* Add Review Form */}
             <div className="project_pop_addReview">
               <input
@@ -303,6 +319,7 @@ const ProjectPopOut = ({ projectData }) => {
                 onChange={(e) => setReviewText(e.target.value)}
               />
               <div className="project_pop_inputStars">
+              <div className="project_pop_inputStars">
                 {[...Array(5)].map((_, i) => (
                   <img
                     key={i}
@@ -312,6 +329,7 @@ const ProjectPopOut = ({ projectData }) => {
                     onClick={() => setRating(i + 1)}
                   />
                 ))}
+                </div>
                 <img
                   src={SubmitReviewIcon}
                   alt="Submit Review"
@@ -320,7 +338,6 @@ const ProjectPopOut = ({ projectData }) => {
                 />
               </div>
             </div>
-          </div>
         </div>
       </div>
     }

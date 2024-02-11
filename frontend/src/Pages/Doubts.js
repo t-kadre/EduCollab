@@ -18,7 +18,7 @@ const Doubts = () => {
     // Function to handle button click
     const handleButtonClick = () => {
         console.log(text);
-        const filteredDoubts = doubts.filter(doubt => doubt.question.toLowerCase().startsWith(text.toLowerCase()));
+        const filteredDoubts = doubts.filter(doubt => doubt.question.toLowerCase().includes(text.toLowerCase()));
         setDisplayedDoubts(filteredDoubts);
         
     };
@@ -45,7 +45,7 @@ const Doubts = () => {
     return (
         <div className='DoubtMainDiv'>
             <Navbar />
-            <div className='doubtsHeading'>Get your doubts cleared</div>
+            <div className='doubtsHeading'>Get your doubts cleared!</div>
             <div className='addAndSearch'>
                 <input
                     type="text"

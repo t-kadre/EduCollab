@@ -1,6 +1,7 @@
 import "./ProfileCard.css";
 import EditProfileIcon from '../Assets/editprofileicon.svg'
 import { useState } from "react";
+import dollarSVG from "../Assets/dollar.svg";
 
 const ProfileCard = () => {
 
@@ -14,7 +15,7 @@ const ProfileCard = () => {
 
   const handleEditProfileClick = () => {
     const link = document.createElement('a');
-    link.href = 'http://localhost:3000updateProfile';
+    link.href = 'http://localhost:3000/updateProfile';
     link.style.display = 'none'; // Hide the link
     document.body.appendChild(link);
     link.click();
@@ -25,7 +26,7 @@ const ProfileCard = () => {
     <div className="ProfileCardBox">
       <div className="ProfileCard-leftPart">
         <div className="ProfileCard-image-container">
-          {/* <img src="" alt="Profile pic" className='ProfileCard-image'/> */}
+          {userData.username.charAt(0) + userData.username.charAt(userData.username.lastIndexOf(" ") + 1)}
         </div>
         <div className="ProfileCard-tag_storer-parent">
           <div className="ProfileCard-tag_storer">
@@ -57,6 +58,7 @@ const ProfileCard = () => {
             </div>
           </div>
           <div className="ProfileCard-rightPart-upper-part-credits-side">
+            <img src={dollarSVG}/>
             <div className="ProfileCard-rightPart-upper-part-credits">{userData.creditScore}</div>
           </div>
         </div>

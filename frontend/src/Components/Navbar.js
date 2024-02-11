@@ -8,7 +8,7 @@ import SearchCard from './SearchCard';
 import ProfileCard from '../Components/ProfileCard';
 import mySVGURL from '../Assets/userDummy.svg';
 import searchSVGURL from '../Assets/search.svg';
-import wishlistSVGURL from '../Assets/heart.svg';
+import FilledStarIcon from '../Assets/heart.svg';
 
 function Navbar() {
   // const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -50,7 +50,7 @@ const [isOpen, setIsOpen] = useState(false);
         </div>
       </div>
       <div className="search-and-profile">
-        <div className="search-button">
+        {/* <div className="search-button">
           <Popup trigger=
             {<div className="navbar-right-circle"><img src={searchSVGURL} alt="My SVG" className="navbar-right-circle-img" /></div>}
             modal nested>
@@ -64,23 +64,7 @@ const [isOpen, setIsOpen] = useState(false);
               )
             }
           </Popup>
-        </div>
-            
-        <div className="wishlist-button">
-        <div className="dropdown">
-        <button onClick={toggleDropdown} className="navbar-right-circle"><img src={wishlistSVGURL} alt="My SVG" className="navbar-right-circle-img" /></button>
-        {isOpen && (
-        <div className='Whishlist-Parent'>
-       <div className='Whishlist-Container'>
-            <div className='Whishlist-content'>
-                {items.map((item)=>{return <Content job={item}/>})}
-            </div>
-        </div>
-    </div>
-      )}
-
-        </div>
-        </div>
+        </div> */}
 
         <div className="profile-button">
           <Popup trigger=

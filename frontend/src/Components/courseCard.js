@@ -3,7 +3,7 @@
 // import Popup from 'reactjs-popup';
 // import mySVGURL from '../Assets/userDummy.svg';
 // import Popoutcourse from './popoutcourse';
-// import wishlistSVGURL from '../Assets/heart.svg'
+// import FilledStarIcon from '../Assets/heart.svg'
 
 
 // function CourseCard({link, rating, courseName, course}) {
@@ -41,7 +41,7 @@
 //                 <div className="course_no_of_likes">{rating}</div>
 //                 <div className="course-right-circle">
 //                 <img
-//                     src={wishlistSVGURL}
+//                     src={FilledStarIcon}
 //                     alt="My SVG"
 //                     className="navbar-right-circle-img"
 //                 />
@@ -90,7 +90,7 @@ import "./courseCard.css";
 import Popup from 'reactjs-popup';
 import mySVGURL from '../Assets/userDummy.svg';
 import Popoutcourse from './popoutcourse';
-import wishlistSVGURL from '../Assets/heart.svg'
+import FilledStarIcon from '../Assets/filledStarIcon.svg'
 
 
 function CourseCard({link, rating, courseName, course}) {
@@ -119,7 +119,7 @@ function CourseCard({link, rating, courseName, course}) {
         </div> */}
         <div className="card-header">
             <div className="course_card_owner">
-              <div className="course_card_owner_name"><a href={ensureFullURL(link)}>Link</a></div>
+              <div className="course_card_owner_name"><a href={ensureFullURL(link)}>Course Link</a></div>
               <div className="course_card_owner_profile-button">
                 
               </div>
@@ -128,9 +128,9 @@ function CourseCard({link, rating, courseName, course}) {
                 <div className="course_no_of_likes">{rating}</div>
                 <div className="course-right-circle">
                 <img
-                    src={wishlistSVGURL}
+                    src={FilledStarIcon}
                     alt="My SVG"
-                    className="navbar-right-circle-img"
+                    className="fsi-right-circle-img"
                 />
                 </div>
             </div>

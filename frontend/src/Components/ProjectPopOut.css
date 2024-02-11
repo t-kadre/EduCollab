@@ -131,22 +131,26 @@
 
 .project_pop_joinbtn {
   width: 100%;
-  height: auto;
   color: #ffffff;
   background-color: #0059cd;
   font-size: 2.8vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2% 0%;
+  padding: 1vw 1vw;
+  margin: 1vw;
   height: fit-content;
   border: none;
-  border-radius: 1.8vw;
+  outline: none;
+  box-shadow:4px 4px 7.300000190734863px 0px #00000033,
+      -3px -4px 4px 0px #FFFFFF80 inset,
+     -3px -3px 4px 0px #FFFFFF,
+     3px 3px 7.599999904632568px -3px #00000033 inset;
 }
 
 .project_pop_right {
   width: 47%;
-  background-color: black;
+  background-color: lightgrey;
   height: 95%;
   border-radius: 1.8vw;
   display: flex;
@@ -170,13 +174,19 @@
   margin: 2%;
   height: 75%;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   margin-bottom: 5%;
+  overflow: scroll;
+}
+
+.project_pop_reviewContainer::-webkit-scrollbar {
+  width: 0;  /* Hide scrollbar */
 }
 
 .project_pop_singleReview {
-  width: 100%;
+  width: 95%;
   color: #0059cd;
   background-color: #ffffff;
   border: none;
@@ -248,4 +258,19 @@
   width: 100%;
   align-items: center;
   padding: 0% 1%;
+}
+
+.project__pop__btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1vw 1vw;
+  margin: 1.5vw auto;
+}
+
+.project_pop_likes{
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

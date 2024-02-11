@@ -48,6 +48,10 @@
     font-weight: 500;
     margin-left: 1vw;
 }
+.course_card_owner_name a{
+  text-decoration: none;
+  color: #0059cd;
+}
 .course_card_owner_profile-button{
     display: flex;
     justify-content: center;
@@ -82,11 +86,18 @@
     color: #0059cd;
   }
 .course-right-circle{
-    width:1vw;
-    height:1vw;
-    border-radius: 100%;
+    width:2vw;
+    height:2vw;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 4px 4px 7.300000190734863px 0px #00000033,
     -3px -4px 4px 0px #FFFFFF80 inset;
+}
+
+.fsi-right-circle-img {
+  width: 1.5vw;
 }
 
 /* .user-name{

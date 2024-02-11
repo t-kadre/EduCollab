@@ -43,6 +43,7 @@
     align-items: center;
     border: none; 
     margin-left: 0.1vw;
+    cursor: pointer;
 }
 .inputSearchbar
 {
@@ -64,6 +65,7 @@
     border-radius: 2vw;
     padding: 1vw;
     border: none;
+    cursor: pointer;
 }
 .searchImg
 {

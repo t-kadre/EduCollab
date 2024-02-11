@@ -26,7 +26,8 @@ function AnsDoubt({quesid}) {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            window.location.reload();
+            alert("Answer to this question submitted successfully");
+            window.location.href = "/dashboard";
 
             // Handle success, maybe clear the form or show a success message
         })

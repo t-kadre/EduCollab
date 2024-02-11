@@ -319,9 +319,9 @@ return (
           )}
           {selectedProjectType === "My" && (
             <div className="carousal-space">
-              <div className="category_name">My Projects and Collabs</div>
+              <div className="category_name">My Projects</div>
               <div className="rule_r"></div>
-              <div className="projects">
+              <div className="projects my">
                 {allProjects.filter((project) => userData.myProjects.includes(project._id)).length > 0 ? (
                   allProjects
                     .filter((project) => userData.myProjects.includes(project._id))

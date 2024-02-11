@@ -50,7 +50,7 @@
 
 import "./ProjectCard.css";
 import ProjectPopOut from "./ProjectPopOut";
-import likeSVG from "../Assets/heart.svg";
+import likeSVG from "../Assets/filledStarIcon.svg";
 import dollarSVG from "../Assets/dollar.svg";
 import Popup from "reactjs-popup";
 import { useEffect } from "react";

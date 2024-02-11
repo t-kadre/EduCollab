@@ -131,8 +131,6 @@ import EmptyStarIcon from "../Assets/emptyStarIcon.png";
 import SubmitReviewIcon from "../Assets/submitReviewIcon.svg";
 
 //import { FaHeart, FaUser, FaSearch } from "react-icons/fa";
-// s
-import wishlistSVGURL from "../Assets/heart.svg";
 import dollarSVG from "../Assets/dollar.svg";
 const Popoutcourse = ({ course }) => {
 
@@ -193,6 +191,7 @@ const Popoutcourse = ({ course }) => {
             setFeedbackData([...feedbackData, {review: reviewText, rating: rating}]);
             setRating(data.data.rating);
             // Handle success, maybe clear the form or show a success message
+
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -201,6 +200,8 @@ const Popoutcourse = ({ course }) => {
     // Reset after submit
     setReviewText("");
     setRating(0);
+    alert("Review submitted successfully");
+    window.location.href = "/dashboard";
   };
 
   useEffect(() => {
@@ -220,14 +221,14 @@ const Popoutcourse = ({ course }) => {
               <span>{course.rating}</span>
               <div className="course_pop_heartContainer">
                 <img
-                  src={wishlistSVGURL}
+                  src={FilledStarIcon}
                   alt=""
                   className="course_pop_heart"
                 />
               </div>
             </div>
           </div>
-          <div className="course_pop_jv"></div>
+          <div className="course_pop_jv">{course.courseName.slice(0,3)}</div>
           <div className="course_pop_courseTitle">{course.courseName}</div>
           <div className="course_pop_describe">
             {course.courseDesc}
@@ -261,6 +262,7 @@ const Popoutcourse = ({ course }) => {
             </div>
         )}
             
+          </div>
             <div className="course_pop_addReview">
               <input
                 type="text"
@@ -289,7 +291,6 @@ const Popoutcourse = ({ course }) => {
                 />
               </div>
             </div>
-          </div>
         </div>
       </div>
 C </>

@@ -36,6 +36,9 @@ function Card({ques,ans}){
         response.json().then(data => {
             // Use the data here
             console.log(data.data);
+            if(data.data.upvote==votes[index].upvote && data.data.downvote===votes[index].downvote){
+                alert("You have already voted for this answer.")
+            }
             setVotes(prevVotes => {
                 const newVotes = [...prevVotes];
                 newVotes[index] = {...newVotes[index], upvote: data.data.upvote, downvote: data.data.downvote};
@@ -66,9 +69,8 @@ function Card({ques,ans}){
         <div className='CardContainer'>
             <div className='question'>
                 <div>
-                    <a href='https://shorturl.at/qKX58' target='_blank'>
                          <img src={defaultUser}  className='dp' />
-                    </a>                                       
+                                                           
                 </div>
                 <div>{ques.question}</div>
             </div>
@@ -81,9 +83,8 @@ function Card({ques,ans}){
                     <div key={index} className='answer'>
                     <div>
                         
-                        <a href='https://shorturl.at/qKX58' target='_blank'>
                             <img src={defaultUser} className='dp' />
-                        </a>                                       
+                                                             
                     </div>
                     <div className='ans'>
                         <div className='SetAnsDiv'><div> {answer.answerText}</div> </div>

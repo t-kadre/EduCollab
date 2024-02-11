@@ -72,6 +72,13 @@
   }
   
   .course_pop_jv {
+    padding: 1vw;
+    font-size: 10vw;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
     height: 35%;
     border: none;
@@ -133,7 +140,6 @@
   .course_pop_joinbtn {
     width: 100%;
     height: auto;
-    color: #ffffff;
     background-color: #0059cd;
     font-size: 2.8vw;
     display: flex;
@@ -144,10 +150,15 @@
     border: none;
     border-radius: 1.8vw;
   }
+
+  .course_pop_joinbtn a {
+    color: white;
+    text-decoration: none;
+  }
   
   .course_pop_right {
     width: 47%;
-    background-color: black;
+    background-color: lightgrey;
     height: 95%;
     border-radius: 1.8vw;
     display: flex;
@@ -170,12 +181,19 @@
     margin: 2%;
     height: 75%;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     margin-bottom: 5%;
+    overflow: scroll;
+  }
+
+  .course_pop_reviewContainer::-webkit-scrollbar {
+    width: 0;  /* Hide scrollbar */
   }
   
   .course_pop_singleReview {
+    width: 100%;
     color: #0059cd;
     background-color: #ffffff;
     border: none;

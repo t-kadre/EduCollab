@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: row-reverse;
     margin: 0vw 2.2vw 1.5vw 5vw;
+    
   }
   .add-project a{
     text-decoration: none;
@@ -41,6 +42,7 @@
       -3px -4px 4px 0px #FFFFFF80 inset,
      -3px -3px 4px 0px #FFFFFF,
      3px 3px 7.599999904632568px -3px #00000033 inset;
+     cursor: pointer;
   }
 
   #popup-6{
@@ -155,6 +157,12 @@
     height:17vw;
     display: flex;
     flex-direction: column;
+  }
+
+  .my{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2vw;
   }
 
   .footer {
