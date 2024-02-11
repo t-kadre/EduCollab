@@ -123,7 +123,7 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
 
 ![detailed-course-popout](./Snippets/detailed-course-popout.png)<br>
 
-7. An Ask-for-help page which enables you to post your doubt or answer other users doubts regarding your project, your college course, or any general doubt. It also allows you to upvote or downvote an answer so that you can get the best answer for you query<br>
+7. An Ask-for-help page which enables you to post your doubt or answer other users doubts regarding your project, your college course, or any general doubt. It also allows you to upvote or downvote an answer so that you can get the best answer for your query<br>
 
 ![doubts-page](./Snippets/doubts-page.png)<br>
 
