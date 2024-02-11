@@ -88,3 +88,43 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
     CLOUD_API_SECRET='LpwP-jH6DnhyvVieJ5nfbPKp2wI'
     ```
 
+## Web Application Snippets
+
+
+1. Microsoft Authentication<br>
+
+![microsoft-authentication](./Snippets/microsoft-authentication.png)<br>
+
+2. Dashboard displaying all projects as well as your own projects<br>
+
+![dashboard](./Snippets/dashboard.png)<br>
+
+![project-page-with-all-projects](./Snippets/project-page-with-all-projects.png)<br>
+
+![project-page-with-my-projects](./Snippets/project-page-with-my-projects.png)<br>
+
+3. Detailed Project pop-out displaying the project owner, project description, Project Reviews, Techstacks used, Link to join project community and the amount of per head credits to be rewarded<br>
+
+![detailed-project-popout](./Snippets/detailed-project-popout.png)<br>
+
+4. Collaborated projects community with real-time chatting feature providing a smooth and healthy discussion about the project<br>
+
+![collabs-page](./Snippets/collabs-page.png)<br>
+
+![real-time-chat](./Snippets/real-time-chat.png)<br>
+
+5. Course Display Page<br>
+
+![course-page](./Snippets/course-page.png)<br>
+
+![course-display](./Snippets/course-display.png)<br>
+
+6. Detailed Course pop-out displaying the course name, course details, review and feedbacks of the course from your very own campus-mates and the link to buy or get the course<br>
+
+![detailed-course-popout](./Snippets/detailed-course-popout.png)<br>
+
+7. An Ask-for-help page which enables you to post your doubt or answer other users doubts regarding your project, your college course, or any general doubt. It also allows you to upvote or downvote an answer so that you can get the best answer for you query<br>
+
+![doubts-page](./Snippets/doubts-page.png)<br>
+
+![upvote-downvote](./Snippets/upvote-downvote.png)<br>
