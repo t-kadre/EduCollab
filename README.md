@@ -82,7 +82,7 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
     CALLBACK_URL = "http://localhost:5500/auth/microsoft/redirect"
     CLIENT_ID = "Your Microsoft Client ID"
     CLIENT_SECRET = "Your Microsoft Client Secret"
-    GOOGLE_APPLICATIONS_CREDENTIALS='Google Firebase Application Credentials'
+    GOOGLE_APPLICATIONS_CREDENTIALS='Google Firebase Application Account Credentials'
     CLOUD_NAME='Cloudinary Name'
     CLOUD_API_KEY='Cloudinary API Key'
     CLOUD_API_SECRET='Cloudinary API Secret'
