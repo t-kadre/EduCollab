@@ -78,14 +78,14 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
 5. **Environment Variables:**
    Make a file named .env in the backend folder, it's content should be:
    ```sh
-    MONGO_URI = "mongodb+srv://Nikhil:KritiDevAllTeam25@cluster0.mxindjp.mongodb.net/?retryWrites=true&w=majority"
+    MONGO_URI = "MongoDB URI to connect"
     CALLBACK_URL = "http://localhost:5500/auth/microsoft/redirect"
     CLIENT_ID = "Your Microsoft Client ID"
     CLIENT_SECRET = "Your Microsoft Client Secret"
-    GOOGLE_APPLICATIONS_CREDENTIALS='./edu-colab-kriti-firebase-adminsdk-7xiu0-3731e68b10.json'
-    CLOUD_NAME='du1g4j6f8'
-    CLOUD_API_KEY='775349273443457'
-    CLOUD_API_SECRET='LpwP-jH6DnhyvVieJ5nfbPKp2wI'
+    GOOGLE_APPLICATIONS_CREDENTIALS='Google Firebase Application Credentials'
+    CLOUD_NAME='Cloudinary Name'
+    CLOUD_API_KEY='Cloudinary API Key'
+    CLOUD_API_SECRET='Cloudinary API Secret'
     ```
 
 ## Web Application Snippets
