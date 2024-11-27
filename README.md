@@ -47,7 +47,7 @@ The user interface is designed to be intuitive and user-friendly, emphasizing ea
 2. **Clone the Repository:**
    ```sh
    git clone https://github.com/t-kadre/EduCollab.git
-   cd KritiDevelopmentPS
+   cd EduCollab
    ```
 
 3. **Backend Setup:**
